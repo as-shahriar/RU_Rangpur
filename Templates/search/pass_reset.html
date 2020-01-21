@@ -1,0 +1,80 @@
+{% extends 'ru/nav.html'%}
+{% load staticfiles %}
+{% block navbar %}
+<title>Reset Password</title>
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<div class="container">
+    <div id="waiting">
+        <div class="d-flex justify-content-center p-3 mt-4">
+            <div class="loader"></div>
+        </div>
+        <div class="d-flex justify-content-center ">
+            <h4>Please wait! Sending email.</h4>
+        </div>
+    </div>
+    <div class="container-login">
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" id='hide' role="alert">
+            {{msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class='py-3 px-4'>
+            <h3>Password Reset</h3>
+        </div>
+
+        <form class='p-4 pb-5' method="POST"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="email" class="form-control" name='email' id="email_field" required placeholder="Enter email address">
+            </div>
+            <button type="submit" onclick="show_wait()" class="btn btn-success">Send Reset Code</button>
+        </form>
+    </div>
+</div>
+
+<style media="screen">
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #28a745;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    #waiting{
+        display: none;
+    }
+</style>
+
+
+<script type="text/javascript">
+    var wait = document.getElementById('waiting');
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    function show_wait() {
+        if (document.getElementById('email_field').value.match(mailformat)) {
+            wait.style.display = 'block';
+        }
+
+
+    }
+</script>
+{% endblock %}

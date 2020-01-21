@@ -1,0 +1,105 @@
+{% extends 'ru/nav.html' %}
+{% load staticfiles %}
+
+{% block navbar %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<title>Search</title>
+<div class="main-content-container container-fluid px-4">
+    <!-- login -->
+    <div>
+        <h1 id='head'>Rangpur Metropolitan Student Welfare Association</h1>
+        <h3 id='sub_head'>University of Rajshahi</h3>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-lg-4 col-md-3  "></div>
+        <div class="container-login col-lg-4 col-md-6 col-sm-12 " id='container_login'>
+
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" id='hide' role="alert">
+                {{msg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+            <div id='title' class='mb-4'>
+                <h3 align='center'>Search</h3>
+
+            </div>
+            <form class='form-group' method="GET">
+                <div class="form-row align-items-center">
+                    <div class="col-12">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="material-icons">search</i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" name='q'
+                                placeholder="Search here" required>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center my-3">
+                            <div class="btn-group ">
+                                <button type="button" class="btn btn-danger dropdown-toggle px-4" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Type
+                                </button>
+                                <div class="dropdown-menu">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By Name">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By Department">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By Blood Group">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By Session">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By School">
+                                    <input type="submit" class="dropdown-item" name="btn" value="By College">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-danger mx-4 px-4">Search</button>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="{% url 'teachers' %}" class="forget_tag mb-1 mx-2">See all Teachers</a>
+                            </div>
+
+
+                            <div class="col-4 d-flex justify-content-center">
+
+                                <a href="{% url 'alumni' %}" class="forget_tag mb-1 mx-2">See all Alumni</a>
+
+                            </div>
+
+
+                            <div class="col-4 d-flex justify-content-end">
+                                <a href="{% url 'students' %}" class="forget_tag mb-1 mx-2">See all Students</a>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <div class="col-lg-4 col-md-3 "></div>
+
+    </div>
+    <div class="d-flex justify-content-center my-3">
+        <a class="btn btn-outline-success" href="{% url 'download'%}">Download Android
+            App</a>
+    </div>
+</div>
+
+{% endblock %}

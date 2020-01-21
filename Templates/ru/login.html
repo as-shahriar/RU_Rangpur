@@ -1,0 +1,112 @@
+{% extends 'ru/nav.html' %} {% load staticfiles %} {% block navbar %}
+
+<title>Login</title>
+<div class="main-content-container container-fluid px-4">
+  <!-- login -->
+  <div>
+    <h1 id="head">Rangpur Metropolitan Student Welfare Association</h1>
+    <h3 id="sub_head">University of Rajshahi</h3>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-lg-4 col-md-3  "></div>
+    <div
+      class="container-login col-lg-4 col-md-6 col-sm-12 "
+      id="container_login"
+    >
+      {% if messages %} {% for msg in messages %}
+      <div
+        class="alert alert-warning alert-dismissible fade show"
+        id="hide"
+        role="alert"
+      >
+        {{msg}}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %} {% endif %}
+
+      <div id="title" class="mb-3">
+        <h3 align="center"><i class="material-icons lock">lock</i>Login</h3>
+      </div>
+      <form class="form-group" method="POST">
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+          <div class="col-12">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="material-icons">face</i>
+                </div>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                id="inlineFormInputGroup"
+                name="username"
+                placeholder="Username"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="material-icons">vpn_key</i>
+                </div>
+              </div>
+              <input
+                type="password"
+                class="form-control"
+                id="inlineFormInputGroup"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-danger mb-1" name="login_btn">
+              Login
+            </button>
+
+            <div class="d-flex justify-content-end">
+              <a href="{% url 'reset' %}" class="forget_tag mb-3 mx-2"
+                >Forget Password?</a
+              >
+            </div>
+            <div class="d-flex justify-content-end">
+              <span class="my-1" style="color: #657575"
+                >Don't have an account yet?</span
+              >
+              <a href="{% url 'signup' %}" class="btn btn-outline-success mx-2"
+                >Signup here</a
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4 col-md-3 "></div>
+  </div>
+  <div class="d-flex justify-content-center my-3">
+    <a class="btn btn-outline-success" href="{% url 'download'%}"
+      >Download Android App</a
+    >
+  </div>
+</div>
+
+<script type="text/javascript">
+  setTimeout(function() {
+    document.getElementById("hide").style.display = "none";
+  }, 5000);
+</script>
+{% endblock %} {% block search %} {% endblock %}

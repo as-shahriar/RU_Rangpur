@@ -1,0 +1,75 @@
+{% extends 'ru/nav.html' %}
+{% load staticfiles %}
+
+{% block navbar %}
+
+<title>{{title}}</title>
+
+<div class="container">
+    <h2 class="p-3">{{title}}</h2>
+    <hr>
+
+    <div class="row">
+
+
+
+        {% for obj in objects %}
+        <!-- card start -->
+        {% if obj.slug != user.username %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' obj.slug %}" id='atag'>
+                <div class="card card-small mb-3 pt-3 pb-2 mycard" style="min-height: 300px;">
+                    <div class="card-header border-bottom text-center">
+                        <div class="mb-3 mx-auto">
+                            <img class="img-thumbnail" src="{{ obj.img.url }}" alt="User Avatar" width="110">
+                        </div>
+                        <h5 class="mb-0">{{ obj.name }}</h5>
+                        <h6 style="color: #dc3545;">{% if obj.alumni %} Alumni {%endif%}</h6>
+                    </div>
+                    <div class="px-3 py-2">
+                        <strong class="text-muted d-block mb-2 mx-1">{{ obj.dept }}</strong>
+                        <strong class="text-muted d-block mb-2 mx-1">{{ obj.session }}</strong>
+
+
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        {% endif %}
+        <!-- card end -->
+        {% endfor %}
+
+
+    </div>
+
+
+    <div class="row my-4">
+        <div class="col-4">
+            {% if objects.has_previous %}
+            <a href="?page={{ objects.previous_page_number }}" class="btn btn-info px-3 ">Page
+                {{ objects.previous_page_number }}</a>{%endif%}
+        </div>
+
+
+        <div class="col-4">
+
+        </div>
+
+
+        <div class="col-4">
+            {% if objects.has_next %}
+            <a href="?page={{ objects.next_page_number }}" class="btn btn-info px-4 float-right">Page
+                {{ objects.next_page_number }}</a>{%endif%}
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+{%endblock%}

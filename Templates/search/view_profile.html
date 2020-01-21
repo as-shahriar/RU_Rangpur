@@ -1,0 +1,164 @@
+{% extends 'ru/nav.html' %}
+{% load staticfiles %}
+<html class="no-js h-100" lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Profile</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+</head>
+
+<body class="h-100">
+
+    {% block navbar %}
+
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-success alert-dismissible fade show mb-0" id='hidealert' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <i class="fa fa-check mx-2"></i>
+        {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+    <div class="main-content-container container-fluid px-4 mt-4">
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-small mb-4 pt-3">
+                    <div class="card-header border-bottom text-center">
+
+                        <div class="mb-3 mx-auto">
+                            <a href="{{ obj.img.url }}" target="_blank">
+                                <img class="img-thumbnail" src="{{ obj.img.url }}" alt="User Avatar" width="110"> </a>
+                        </div>
+
+
+                        <h4 class="mb-0">{{ obj.name }}</h4>
+                        <h6>{{ obj.relation }}</h6>
+                        <h6 style="color: #dc3545;">{% if obj.alumni %}Alumni{%endif%}</h6>
+
+                    </div>
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item p-4">
+                            <strong class="text d-block mb-2"><img src="{% static 'img/email.svg'%}" alt="email: ">
+                                {{obj.email}}</strong>
+                            <strong class="text d-block mb-2"><img src="{% static 'img/cell.svg'%}" alt="mobile: ">
+                                {{obj.mobile}}</strong>
+                            <strong class="text d-block mb-2"><img src="{% static 'img/blood.svg'%}" alt="Blood: ">
+                                {{obj.blood}}</strong>
+                            <strong class="text d-block mb-2"><img src="{% static 'img/gender.svg'%}" alt="Gender: ">
+                                {{obj.gender}}</strong>
+                            {% if obj.bio|length is not 0 %}
+                            <span style="white-space:pre-wrap;">{{obj.bio}}</span>
+                            {% endif %}
+                            <small class="text d-block mb-2 mt-2">Joined {{obj.date}}</small>
+                        </li>
+                    </ul>
+
+
+                    <a class="btn btn-color py-2" target="_blank" href="{{obj.fb}}"><img id='fbicon'
+                            src="{%static 'img/facebook.png'%}" alt="Fb"></a>
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card card-small mb-4">
+                    <div class="card-header border-bottom">
+                        <h6 class="m-0">Account Details</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-3">
+                            <div class="row">
+                                <div class="col">
+
+                                    <div class=" form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="feEmailAddress">Department</label>
+                                            <input type="text" class="form-control" value="{{obj.dept}}" readonly>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="fePassword">Session</label>
+                                            <input type="text" class="form-control" value="{{obj.session}}" readonly>
+                                        </div>
+
+                                    </div>
+                                    <div class=" form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="feEmailAddress">Present Address</label>
+                                            <input type="text" class="form-control" placeholder="Present Address"
+                                                value="{{obj.present_address}}" readonly>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="fePassword">Permanent Address</label>
+                                            <input type="text" class="form-control" name='permanent_address'
+                                                placeholder="Permanent Address" value="{{obj.permanent_address}}"
+                                                readonly></div>
+                                    </div>
+                                    <div class=" form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="feEmailAddress">School</label>
+                                            <input type="text" class="form-control" placeholder="School"
+                                                value="{{obj.school}}" readonly> </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="fePassword">College</label>
+                                            <input type="text" class="form-control" placeholder="College"
+                                                value="{{obj.college}}" readonly> </div>
+                                    </div>
+                                    <div class=" form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="feEmailAddress">University</label>
+                                            <input type="text" class="form-control" placeholder="School"
+                                                value="{{obj.university}}" readonly> </div>
+
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="feFirstName">Father's Name</label>
+                                            <input type="text" class="form-control" name='father'
+                                                placeholder="Father's Name" value="{{obj.father}}" readonly>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="feLastName">Mother's Name</label>
+                                            <input type="text" class="form-control" name='mother'
+                                                placeholder="Mother's Name" value="{{obj.mother}}" readonly> </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Default Light Table -->
+    </div>
+
+
+
+
+
+
+</body>
+
+{% endblock %}

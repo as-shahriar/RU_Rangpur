@@ -1,0 +1,46 @@
+{% extends 'ru/nav.html'%}
+{% load staticfiles %}
+{% block navbar %}
+<style media="screen">
+    body {
+        background-color: #212529;
+    }
+
+    #atag2 {
+        text-decoration: none;
+        color: #fff;
+    }
+</style>
+<table class="table table-hover table-dark mt-2">
+    <thead>
+
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Blood Group</th>
+            <th scope="col">Department</th>
+            <th scope="col">Session</th>
+            <th scope="col">Mobile No</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object %}
+
+        <tr>
+            <th></th>
+            <th scope="row"><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.name}}</a></th>
+            <td><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.blood}}</a></td>
+            <td><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.dept}}</a></td>
+            <td><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.session}}</a></td>
+            <td><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.mobile}}</a></td>
+            <td><a href="{% url 'other_profile' obj.slug %}" id='atag2'>{{obj.email}}</a></td>
+        </tr>
+
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

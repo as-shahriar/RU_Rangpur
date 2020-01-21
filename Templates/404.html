@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>404 Not Found</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="JoashPereira">
+    <link rel="stylesheet" href="{% static 'assets/monochrome-404.css' %}" />
+    <script src="{% static 'assets/modernizr.js' %}"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="overlay"></div>
+        <div class="item-title">
+            <div id="message"></div>
+            <div class="link-bottom">
+                <a class="link-icon" href="{% url 'home' %}"><i class="icon ion-ios-home"></i> HOME</a>
+
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/jquery.easings.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/monochrome-404.js' %}"></script>
+</body>
+
+</html>

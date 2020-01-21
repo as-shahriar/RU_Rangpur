@@ -1,0 +1,55 @@
+{% extends 'ru/nav.html'%}
+{% load staticfiles %}
+{% block navbar %}
+<title>Report</title>
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+<div class="container">
+    <div class="container-login">
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" id='hide' role="alert">
+            {{msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class='py-3 px-4'>
+            <h3>Report</h3>
+            <span id="emailHelp" class="form-text text-muted">If you have any issue, you can report here.</span>
+
+        </div>
+
+        <form class='p-4 pb-5' method="POST"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" class="form-control" name='name' id="exampleInputPassword1" required
+                    placeholder="Full Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Session</label>
+                <input type="text" class="form-control" name='session' id="exampleInputEmail1"
+                    aria-describedby="emailHelp" required placeholder="Ex: 2016-2017">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Department</label>
+                <input type="text" class="form-control" name='department' id="exampleInputEmail1"
+                    aria-describedby="emailHelp" required placeholder="Department">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Contact</label>
+                <input type="text" class="form-control" name='email' id="exampleInputEmail1"
+                    aria-describedby="emailHelp" required placeholder="email or mobile number"
+                    {%if user.is_authenticated %}value="{{user.email}}" {%endif%}>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="exampleCheck1">Your Problem</label>
+                <textarea class='form-control' name="report" rows="3" cols="80" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

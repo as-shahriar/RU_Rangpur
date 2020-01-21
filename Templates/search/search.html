@@ -1,0 +1,113 @@
+{% extends 'ru/nav.html' %}
+{% load staticfiles %}
+
+{% block navbar %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<title>Home</title>
+<div class="main-content-container container-fluid px-4">
+
+    <div class="row mt-4">
+        <!-- search section -->
+        <div class="container col-md-12">
+
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12">
+
+            <div class="container-search">
+                <div class="">
+                    <h3>Search</h3>
+
+                </div>
+
+
+                <form method="get">
+                    <div class=" row">
+                        <input class=" form-control col-md-12 mr-sm-2" type="search" required placeholder="Search"
+                            name='q' aria-label="Search">
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="btn-group mt-3 float-right mx-2">
+                            <button type="button btn-search" class="btn btn-danger dropdown-toggle "
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Type
+                            </button>
+                            <div class="dropdown-menu">
+                                <input type="submit" class="dropdown-item" name="btn" value="By Name">
+                                <input type="submit" class="dropdown-item" name="btn" value="By Department">
+                                <input type="submit" class="dropdown-item" name="btn" value="By Blood Group">
+                                <input type="submit" class="dropdown-item" name="btn" value="By Session">
+                                <input type="submit" class="dropdown-item" name="btn" value="By School">
+                                <input type="submit" class="dropdown-item" name="btn" value="By College">
+                            </div>
+                        </div>
+                        <div class="btn-group mt-3 mx-2">
+                            <input type="submit" class="btn btn-danger" value="Search">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-lg-9 col-md-12">
+            <div class="row">
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="container d-flex justify-content-center m-3 mt-5">
+                    <h3>{{msg}}</h3>
+                </div>
+                {%endfor%}
+                {%endif%}
+
+
+                {% for obj in objects %}
+                <!-- card start -->
+                {% if obj.slug != user.username %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' obj.slug %}"
+                        id='atag'>
+                        <div class="card card-small mb-3 pt-3 pb-2 mycard " style="min-height: 300px;">
+                            <div class="card-header border-bottom text-center">
+                                <div class="mb-3 mx-auto">
+                                    <img class="img-thumbnail" src="{{ obj.img.url }}" alt="User Avatar" width="110">
+                                </div>
+                                <h5 class="mb-0">{{ obj.name }}</h5>
+                                <h6 style="color: #dc3545;">{% if obj.alumni %} Alumni {%endif%}</h6>
+                            </div>
+                            <div class="px-3 py-2">
+                                <strong class="text-muted d-block mb-2 mx-1">{{ obj.dept }}</strong>
+                                <strong class="text-muted d-block mb-2 mx-1">{{ obj.session }}</strong>
+
+
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {% endif %}
+                <!-- card end -->
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style media="screen">
+    #atag {
+        text-decoration: none;
+        color: #24252a;
+    }
+</style>
+
+{% endblock %}
+{% block search %}
+{% endblock %}

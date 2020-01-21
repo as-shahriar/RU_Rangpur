@@ -1,0 +1,463 @@
+{% extends 'ru/nav.html' %}
+{% load staticfiles %}
+<html class="no-js h-100" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Profile</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+
+<body class="h-100">
+
+    {% block navbar %}
+
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-success alert-dismissible fade show mb-0" id='hidealert' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <i class="fa fa-check mx-2"></i>
+        {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+
+    <div class="main-content-container container-fluid px-4 mt-3">
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-small mb-4 pt-3">
+                    <div class="card-header border-bottom text-center">
+                        <div class="mb-3 mx-auto">
+                            <img class="img-thumbnail" src="{{ userinfo.img.url }}" alt="User Avatar" width="110">
+                        </div>
+                        <h4 class="mb-0">{% if hasinfo %}{{userinfo.name}}{% else %}Full Name{% endif %}</h4>
+                        <h6>{{ userinfo.relation }}</h6>
+                        <h6 style="color: #dc3545;">{% if userinfo.alumni %}Alumni{%endif%}</h6>
+
+                    </div>
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item p-4">
+                            <strong class="text d-block mb-2"><a class="btn btn-outline-danger py-2 "
+                                    title="View as Public" target="_blank"
+                                    href="{% url 'other_profile' userinfo.slug %}"><img src="{% static 'img/user.svg'%}"
+                                        alt="username"> {{ user.username }}</a></strong>
+                            {% if hasinfo and userinfo.bio|length is not 0 %}
+
+                            <span style="white-space:pre-wrap;">{{ userinfo.bio }}</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+
+                    <a class="btn btn-danger py-2" onClick="return confirm('Do you want to delete this account?');"
+                        href="{% url 'delete' %}">Delete Account</a>
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card card-small mb-4">
+                    <div class="card-header border-bottom">
+                        <h6 class="m-0">Account Details</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-3">
+                            <div class="row">
+                                <div class="col">
+                                    <form onsubmit="return form_validation()" method="POST"
+                                        enctype="multipart/form-data"> {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feFirstName">Name<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='name'
+                                                    {% if hasinfo and userinfo.name|length is not 0%}
+                                                    value="{{userinfo.name}}" {%endif%} placeholder="Full Name"> </div>
+                                            <div class=" form-group col-md-6">
+                                                <label for="feLastName">Mobile No<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='mobile'
+                                                    placeholder="Mobile No"
+                                                    {% if hasinfo and userinfo.mobile|length is not 0%}
+                                                    value="{{userinfo.mobile}}" {%endif%}> </div>
+                                        </div>
+                                        <div class="
+                                                  form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feEmailAddress">Email<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="email" class="form-control" required name='email'
+                                                    placeholder="Email"
+                                                    {% if hasinfo and userinfo.email|length is not 0%}
+                                                    value="{{userinfo.email}}" {%else%} value='{{user.email}}'
+                                                    {%endif%}> </div>
+                                            <div class="form-group col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="fePassword">Password</label>
+                                                    </div>
+                                                    <div class="form-check col-md-6 px-5 pb-2">
+                                                        <input class="form-check-input " type="checkbox"
+                                                            name='passcheck' onclick="show_or_hide_password()"
+                                                            id="check">
+                                                        <label class="form-check-label " for="defaultCheck1">
+                                                            <small>Change Password</small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <input type="password" class="form-control" name='pass' id="password"
+                                                    placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class=" form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feEmailAddress">Present Address<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='present_address'
+                                                    placeholder="Present Address"
+                                                    {% if hasinfo and userinfo.present_address|length is not 0%}
+                                                    value="{{userinfo.present_address}}" {%endif%}>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="fePassword">Permanent Address<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required
+                                                    name='permanent_address' placeholder="Permanent Address"
+                                                    {% if hasinfo and userinfo.permanent_address|length is not 0%}
+                                                    value="{{userinfo.permanent_address}}" {%endif%}>
+                                            </div>
+                                        </div>
+                                        <div class=" form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feEmailAddress">School<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='school'
+                                                    placeholder="School"
+                                                    {% if hasinfo and userinfo.school|length is not 0%}
+                                                    value="{{userinfo.school}}" {%endif%}> </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="fePassword">College<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='college'
+                                                    placeholder="College"
+                                                    {% if hasinfo and userinfo.college|length is not 0%}
+                                                    value="{{userinfo.college}}" {%endif%}> </div>
+                                        </div>
+
+                                        <div class=" form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feEmailAddress">University<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='uni'
+                                                    {% if hasinfo and userinfo.university|length is not 0%}
+                                                    value="{{userinfo.university}}" {%else%}
+                                                    value="University of Rajshahi" {%endif%}> </div>
+                                            <div class="form-group col-md-6">
+
+                                                <label for="feInputState">I'm a ______ of University of Rajshahi<span
+                                                        style="color:#cf000f">
+                                                        *</span></label>
+                                                <select id="relation" name='relation' class="form-control">
+                                                    {% if hasinfo %}
+                                                    <option selected>{{ userinfo.relation }}</option>
+                                                    {% else %}
+                                                    <option selected>Choose...</option>
+                                                    {% endif %}
+                                                    <option>Student</option>
+                                                    <option>Teacher</option>
+                                                    <option>Student & Teacher</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="feInputCity">Department<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <select id="deptid" name='dept' class="form-control">
+                                                    {% if hasinfo %}
+                                                    <option selected>{{ userinfo.dept }}</option>
+                                                    {% else %}
+                                                    <option selected>Choose...</option>
+                                                    {% endif %}
+                                                    <option>CSE</option>
+                                                    <option>Philosophy</option>
+                                                    <option>History</option>
+                                                    <option>English</option>
+                                                    <option>Bangla</option>
+                                                    <option>Islamic History & Culture</option>
+                                                    <option>Arabic</option>
+                                                    <option>Islamic Studies</option>
+                                                    <option>Theatre</option>
+                                                    <option>Music</option>
+                                                    <option>Persian language and literature</option>
+                                                    <option>Sanskrit</option>
+                                                    <option>Urdu</option>
+                                                    <option>Law</option>
+                                                    <option>Law and Land Administration</option>
+                                                    <option>Mathematics</option>
+                                                    <option>Physics</option>
+                                                    <option>Chemistry</option>
+                                                    <option>Statistics</option>
+                                                    <option>Biochemistry & Molecular Biology</option>
+                                                    <option>Pharmacy</option>
+                                                    <option>Population Science & Human Resource Development</option>
+                                                    <option>Applied Mathematics</option>
+                                                    <option>Physical Education and Sports Sciences</option>
+                                                    <option>Accounting and Information Systems</option>
+                                                    <option>Management studies</option>
+                                                    <option>Marketing</option>
+                                                    <option>Finance</option>
+                                                    <option>Banking and Insurance</option>
+                                                    <option>Tourism and Hospitality Management</option>
+                                                    <option>Economics</option>
+                                                    <option>Political Science</option>
+                                                    <option>Social Work</option>
+                                                    <option>Sociology</option>
+                                                    <option>Mass Communication and Journalism</option>
+                                                    <option>Information Science & Library Management</option>
+                                                    <option>Public Administration</option>
+                                                    <option>Anthropology</option>
+                                                    <option>Folklore</option>
+                                                    <option>International Relations</option>
+                                                    <option>Geography & Environmental Studies</option>
+                                                    <option>Psychology</option>
+                                                    <option>Botany</option>
+                                                    <option>Zoology</option>
+                                                    <option>Geology & Mining</option>
+                                                    <option>Genetic Engineering & Biotechnology</option>
+                                                    <option>Clinical Psychology</option>
+                                                    <option>Agronomy and Agricultural Extension</option>
+                                                    <option>Fisheries</option>
+                                                    <option>Veterinary & Animal Sciences</option>
+                                                    <option>Crop Science and Technology</option>
+                                                    <option>Applied Chemistry & Chemical Engineering</option>
+                                                    <option>Computer Science & Engineering</option>
+                                                    <option>Information & Communication Engineering</option>
+                                                    <option>Materials Science and Engineering</option>
+                                                    <option>Electrical and Electronic Engineering</option>
+                                                    <option>Painting, Oriental Art & Printmaking</option>
+                                                    <option>Ceramics and Sculpture</option>
+                                                    <option>Graphic Design, Crafts & History of Art</option>
+
+                                                </select></div>
+
+
+
+                                            <div class="form-group col-md-3">
+                                                <label for="feInputState">Session<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <select id="sessionid" name='session' class="form-control">
+                                                    {% if hasinfo %}
+                                                    <option selected>{{ userinfo.session }}</option>
+                                                    {% else %}
+                                                    <option selected>Choose...</option>
+                                                    {% endif %}
+                                                    {% for i in date_list %}
+                                                    <option>{{i}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="feInputState">Gender<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <select id="genderid" name='gender' class="form-control">
+                                                    {% if hasinfo %}
+                                                    <option selected>{{ userinfo.gender }}</option>
+                                                    {% else %}
+                                                    <option selected>Choose...</option>
+                                                    {% endif %}
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputZip">Blood Group<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <select id="bloodid" name="blood" class="form-control">
+                                                    {% if hasinfo %}
+                                                    <option selected>{{ userinfo.blood }}</option>
+                                                    {% else %}
+                                                    <option selected>Choose...</option>
+                                                    {% endif %}
+                                                    <option value="A+">A+</option>
+                                                    <option value="B+">B+</option>
+                                                    <option value="O+">O+</option>
+                                                    <option value="AB+">AB+</option>
+                                                    <option value="A-">A-</option>
+                                                    <option value="B-">B-</option>
+                                                    <option value="O-">O-</option>
+                                                    <option value="AB-">AB-</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feFirstName">Father's Name<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='father'
+                                                    placeholder="Father's Name"
+                                                    {% if hasinfo and userinfo.father|length is not 0%}
+                                                    value="{{userinfo.father}}" {%endif%}> </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="feLastName">Mother's Name<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="text" class="form-control" required name='mother'
+                                                    placeholder="Mother's Name"
+                                                    {% if hasinfo and userinfo.mother|length is not 0%}
+                                                    value="{{userinfo.mother}}" {%endif%}> </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="feDescription">Facebook<span style="color:#cf000f">
+                                                        *</span></label>
+                                                <input type="url" class="form-control" required name='fb'
+                                                    placeholder="https://facebook.com/username"
+                                                    {% if hasinfo and userinfo.fb|length is not 0%}
+                                                    value="{{userinfo.fb}}" {%else%}value="https://facebook.com/"
+                                                    {%endif%}>
+                                            </div>
+
+
+
+                                            <div class="form-group col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="fePassword">Profile Picture</label>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="custom-file">
+                                                        <input type="file" onchange="ValidateSize(this)" name='img'
+                                                            class="custom-file-input" id="pic">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                            file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="feDescription">Occupational Status</label>
+                                                <textarea class="form-control" name="bio" rows="4"
+                                                    placeholder="Ex:&#10;Professor&#10;Department of X&#10;University of Y">{% if hasinfo and userinfo.bio|length is not 0 %}{{userinfo.bio}}{% else %}{%endif%}</textarea>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name='submit_btn' class="btn btn-success">Update
+                                            Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Default Light Table -->
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show mb-0" id='hidealert2' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <strong>Please fill out all required fields!</strong>
+    </div>
+
+    <script type="text/javascript">
+        function ValidateSize(file) {
+            var FileSize = file.files[0].size / 1024 / 1024; // in MB
+            if (FileSize > 0.5) {
+                alert('Image size exceeds 500KB!');
+                clearFileInput("pic");
+            }
+        }
+
+        function clearFileInput(id) {
+            var oldInput = document.getElementById(id);
+
+            var newInput = document.createElement("input");
+
+            newInput.type = "file";
+            newInput.id = oldInput.id;
+            newInput.name = oldInput.name;
+            newInput.className = oldInput.className;
+            newInput.style.cssText = oldInput.style.cssText;
+            oldInput.parentNode.replaceChild(newInput, oldInput);
+        }
+    </script>
+
+
+
+</body>
+<script type="text/javascript">
+    var dept = document.getElementById('deptid');
+    var session = document.getElementById('sessionid');
+    var blood = document.getElementById('bloodid');
+    var btn = document.getElementById('submit-btn');
+    var msg = document.getElementById("hidealert");
+    var msg2 = document.getElementById("hidealert2");
+    var gender = document.getElementById("genderid");
+    var checkbox = document.getElementById("check");
+    var checkbox2 = document.getElementById("checkforpic");
+    var passfield = document.getElementById("password");
+    var relation = document.getElementById("relation");
+
+
+    var time = 4000;
+
+    function show_or_hide_password() {
+        if (checkbox.checked == true) {
+            passfield.disabled = false;
+        } else {
+            passfield.value = "";
+            passfield.disabled = true;
+        }
+    }
+
+
+
+
+
+    msg2.style.display = "none";
+    passfield.disabled = true;
+
+
+    setTimeout(function () {
+        msg.style.display = "none";
+    }, time);
+
+    function form_validation() {
+        if (gender.options[gender.selectedIndex].text == 'Choose...' || dept.options[dept.selectedIndex].text ==
+            'Choose...' || session.options[session.selectedIndex].text == 'Choose...' || blood.options[blood
+                .selectedIndex].text == 'Choose...' || relation.options[relation
+                .selectedIndex].text == 'Choose...') {
+
+            msg2.style.display = "block";
+            setTimeout(function () {
+                msg2.style.display = "none";
+            }, time);
+            var scrollingElement = (document.scrollingElement || document.body);
+            scrollingElement.scrollTop = scrollingElement.scrollHeight;
+            return false;
+        }
+        return true;
+    }
+    btn.addEventListener("click", form_validation);
+</script>
+
+{% endblock %}
