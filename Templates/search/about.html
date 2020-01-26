@@ -43,6 +43,7 @@
             <h3 class="d-flex justify-content-center">Committee of {{obj.year}}</h3>
         </div>
         <div class="row">
+            {% if president != "" %}
             <!-- biginig of the card -->
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
                     id='atag'>
@@ -54,127 +55,405 @@
                             <h5 class="mb-0">{{ president.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
+                            <strong class="text d-block mb-2">সভাপতি</strong>
                             <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
                             <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
 
-
+            {% if ast_president_1 != "" %}
             <!-- biginig of the card -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' ast_president_1.slug %}"
                     id='atag'>
                     <div class="card card-small mb-3 pt-3 mycard">
                         <div class="card-header border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ president.img.url }}" alt="User Avatar" width="110">
+                                <img class="rounded-circle" src="{{ ast_president_1.img.url }}" alt="User Avatar"
+                                    width="110">
                             </div>
-                            <h5 class="mb-0">{{ president.name }}</h5>
+                            <h5 class="mb-0">{{ ast_president_1.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
+                            <strong class="text d-block mb-2">সহ-সভাপতি</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_president_1.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_president_1.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
 
+            {% if ast_president_2 != "" %}
             <!-- biginig of the card -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' ast_president_2.slug %}"
                     id='atag'>
                     <div class="card card-small mb-3 pt-3 mycard">
                         <div class="card-header border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ president.img.url }}" alt="User Avatar" width="110">
+                                <img class="rounded-circle" src="{{ ast_president_2.img.url }}" alt="User Avatar"
+                                    width="110">
                             </div>
-                            <h5 class="mb-0">{{ president.name }}</h5>
+                            <h5 class="mb-0">{{ ast_president_2.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
+                            <strong class="text d-block mb-2">সহ-সভাপতি</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_president_2.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_president_2.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
 
+            {% if general_secretary != "" %}
             <!-- biginig of the card -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' general_secretary.slug %}"
                     id='atag'>
                     <div class="card card-small mb-3 pt-3 mycard">
                         <div class="card-header border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ president.img.url }}" alt="User Avatar" width="110">
+                                <img class="rounded-circle" src="{{ general_secretary.img.url }}" alt="User Avatar"
+                                    width="110">
                             </div>
-                            <h5 class="mb-0">{{ president.name }}</h5>
+                            <h5 class="mb-0">{{ general_secretary.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
+                            <strong class="text d-block mb-2">সাধারণ সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ general_secretary.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ general_secretary.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
 
+            {% if ast_general_secretary_1 != "" %}
             <!-- biginig of the card -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a
+                    href="{% url 'other_profile' ast_general_secretary_1.slug %}" id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ ast_general_secretary_1.img.url }}"
+                                    alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ ast_general_secretary_1.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">যুগ্ম সাধারণ সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_general_secretary_1.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_general_secretary_1.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+
+
+            {% if ast_general_secretary_2 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a
+                    href="{% url 'other_profile' ast_general_secretary_2.slug %}" id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ ast_general_secretary_2.img.url }}"
+                                    alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ ast_general_secretary_2.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">যুগ্ম সাধারণ সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_general_secretary_2.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_general_secretary_2.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+
+            {% if sangothonik_sompadok != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a
+                    href="{% url 'other_profile' sangothonik_sompadok.slug %}" id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ sangothonik_sompadok.img.url }}" alt="User Avatar"
+                                    width="110">
+                            </div>
+                            <h5 class="mb-0">{{ sangothonik_sompadok.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text-muted d-block mb-2">সাংগঠনিক সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ sangothonik_sompadok.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ sangothonik_sompadok.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+
+
+            {% if treasurer != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' treasurer.slug %}"
                     id='atag'>
                     <div class="card card-small mb-3 pt-3 mycard">
                         <div class="card-header border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ president.img.url }}" alt="User Avatar" width="110">
+                                <img class="rounded-circle" src="{{ treasurer.img.url }}" alt="User Avatar" width="110">
                             </div>
-                            <h5 class="mb-0">{{ president.name }}</h5>
+                            <h5 class="mb-0">{{ treasurer.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
+                            <strong class="text d-block mb-2">কোষাধ্যক্ষ</strong>
+                            <strong class="text-muted d-block mb-2">{{ treasurer.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ treasurer.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
 
+            {% if ast_treasurer_1  != "" %}
             <!-- biginig of the card -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' president.slug %}"
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' ast_treasurer_1.slug %}"
                     id='atag'>
                     <div class="card card-small mb-3 pt-3 mycard">
                         <div class="card-header border-bottom text-center">
                             <div class="mb-3 mx-auto">
-                                <img class="rounded-circle" src="{{ president.img.url }}" alt="User Avatar" width="110">
+                                <img class="rounded-circle" src="{{ ast_treasurer_1.img.url }}" alt="User Avatar"
+                                    width="110">
                             </div>
-                            <h5 class="mb-0">{{ president.name }}</h5>
+                            <h5 class="mb-0">{{ ast_treasurer_1.name }}</h5>
                         </div>
                         <div class="px-3 py-2">
-                            <strong class="text d-block mb-2">President</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.dept }}</strong>
-                            <strong class="text-muted d-block mb-2">{{ president.session }}</strong>
+                            <strong class="text d-block mb-2"> সহকারী কোষাধ্যক্ষ </strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_treasurer_1.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_treasurer_1.session }}</strong>
                         </div>
                     </div>
-
-
                 </a>
             </div>
             <!-- end of card -->
+            {%endif%}
+
+            {% if ast_treasurer_2 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' ast_treasurer_2.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ ast_treasurer_2.img.url }}" alt="User Avatar"
+                                    width="110">
+                            </div>
+                            <h5 class="mb-0">{{ ast_treasurer_2.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">সহকারী কোষাধ্যক্ষ </strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_treasurer_2.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ ast_treasurer_2.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if doptor_sompadok != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' doptor_sompadok.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ doptor_sompadok.img.url }}" alt="User Avatar"
+                                    width="110">
+                            </div>
+                            <h5 class="mb-0">{{ doptor_sompadok.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">দপ্তর সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ doptor_sompadok.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ doptor_sompadok.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if prochar_sompadok != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' prochar_sompadok.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ prochar_sompadok.img.url }}" alt="User Avatar"
+                                    width="110">
+                            </div>
+                            <h5 class="mb-0">{{ prochar_sompadok.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">প্রচার সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ prochar_sompadok.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ prochar_sompadok.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if appayon_sompadok != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' appayon_sompadok.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ appayon_sompadok.img.url }}" alt="User Avatar"
+                                    width="110">
+                            </div>
+                            <h5 class="mb-0">{{ appayon_sompadok.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">আপ্যায়ন সম্পাদক</strong>
+                            <strong class="text-muted d-block mb-2">{{ appayon_sompadok.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ appayon_sompadok.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if sikkha_krira_sangskritik_sompadok != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a
+                    href="{% url 'other_profile' sikkha_krira_sangskritik_sompadok.slug %}" id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ sikkha_krira_sangskritik_sompadok.img.url }}"
+                                    alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ sikkha_krira_sangskritik_sompadok.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">শিক্ষা, ক্রীড়া ও সাংস্কৃতিক সম্পাদক</strong>
+                            <strong
+                                class="text-muted d-block mb-2">{{ sikkha_krira_sangskritik_sompadok.dept }}</strong>
+                            <strong
+                                class="text-muted d-block mb-2">{{ sikkha_krira_sangskritik_sompadok.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if member_1 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' member_1.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ member_1.img.url }}" alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ member_1.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">সদস্য</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_1.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_1.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+            {% if member_2 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' member_2.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ member_2.img.url }}" alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ member_2.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">সদস্য</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_2.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_2.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+            {% if member_3 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' member_3.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ member_3.img.url }}" alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ member_3.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">সদস্য</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_3.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_3.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+            {% if member_4 != "" %}
+            <!-- biginig of the card -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="{% url 'other_profile' member_4.slug %}"
+                    id='atag'>
+                    <div class="card card-small mb-3 pt-3 mycard">
+                        <div class="card-header border-bottom text-center">
+                            <div class="mb-3 mx-auto">
+                                <img class="rounded-circle" src="{{ member_4.img.url }}" alt="User Avatar" width="110">
+                            </div>
+                            <h5 class="mb-0">{{ member_4.name }}</h5>
+                        </div>
+                        <div class="px-3 py-2">
+                            <strong class="text d-block mb-2">সদস্য</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_4.dept }}</strong>
+                            <strong class="text-muted d-block mb-2">{{ member_4.session }}</strong>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of card -->
+            {%endif%}
+
+
+
         </div>
 
     </div>

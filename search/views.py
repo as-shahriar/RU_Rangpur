@@ -87,7 +87,7 @@ def error_page(request):
     return render(request,'404.html')
 
 def about(request):
-    context,president = None,None
+    context = None
     q = request.GET.get('q')
     if q is not None:
         context = getObj(q,request)
@@ -96,6 +96,26 @@ def about(request):
     return render(request,'search/about.html',context)
 
 def getObj(q,request):
+    president = ""
+    ast_president_1 = ""
+    ast_president_2 = ""
+    ast_president_3 = ""
+    general_secretary = ""
+    ast_general_secretary_1 = ""
+    ast_general_secretary_2 = ""
+    sangothonik_sompadok = ""
+    treasurer = ""
+    ast_treasurer_1 = ""
+    ast_treasurer_2 = ""
+    doptor_sompadok = ""
+    prochar_sompadok = ""
+    appayon_sompadok = ""
+    sikkha_krira_sangskritik_sompadok = ""
+    member_1 = ""
+    member_2 = ""
+    member_3 = ""
+    member_4 = ""
+
     all = Committee.objects.all()
     for i in all:
         if i.active == True:
@@ -109,13 +129,86 @@ def getObj(q,request):
         object = Committee.objects.get( year = year )
     finally:
         try:
-            president = UserInfo.objects.get(slug = object.president)
+            if object.president != "N/A":
+                president = UserInfo.objects.get(slug = object.president)
+            if object.ast_president_1 != "N/A":
+                ast_president_1 = UserInfo.objects.get(slug = object.ast_president_1)
+            if object.ast_president_2 != "N/A":
+                ast_president_2 = UserInfo.objects.get(slug = object.ast_president_2)
+            if object.ast_president_3 != "N/A":
+                ast_president_3 = UserInfo.objects.get(slug = object.ast_president_3)
+            if object.general_secretary != "N/A":
+                general_secretary = UserInfo.objects.get(slug = object.general_secretary)
+            if object.ast_general_secretary_1 != "N/A":
+                ast_general_secretary_1 = UserInfo.objects.get(slug = object.ast_general_secretary_1)
+            if object.ast_general_secretary_2 != "N/A":
+                ast_general_secretary_2 = UserInfo.objects.get(slug = object.ast_general_secretary_2)
+            if object.sangothonik_sompadok != "N/A":
+                sangothonik_sompadok = UserInfo.objects.get(slug = object.sangothonik_sompadok)
+            if object.treasurer != "N/A":
+                treasurer = UserInfo.objects.get(slug = object.treasurer)
+            if object.ast_treasurer_1 != "N/A":
+                ast_treasurer_1 = UserInfo.objects.get(slug = object.ast_treasurer_1)
+            if object.ast_treasurer_2 != "N/A":
+                ast_treasurer_2 = UserInfo.objects.get(slug = object.ast_treasurer_2)
+            if object.doptor_sompadok != "N/A":
+                doptor_sompadok = UserInfo.objects.get(slug = object.doptor_sompadok)
+            if object.prochar_sompadok != "N/A":
+                prochar_sompadok = UserInfo.objects.get(slug = object.prochar_sompadok)
+            if object.appayon_sompadok != "N/A":
+                appayon_sompadok = UserInfo.objects.get(slug = object.appayon_sompadok )
+            if object.sikkha_krira_sangskritik_sompadok != "N/A":
+                sikkha_krira_sangskritik_sompadok = UserInfo.objects.get(slug = object.sikkha_krira_sangskritik_sompadok)
+            if object.member_1 != "N/A":
+                member_1 = UserInfo.objects.get(slug = object.member_1)
+            if object.member_2 != "N/A":
+                member_2 = UserInfo.objects.get(slug = object.member_2)
+            if object.member_3 != "N/A":
+                member_3 = UserInfo.objects.get(slug = object.member_3)
+            if object.member_4 != "N/A":
+                member_4 = UserInfo.objects.get(slug = object.member_4)
         except:
-            object = Committee.objects.get( year = year )
-            president = UserInfo.objects.get(slug = object.president)
+            raise 
+            # object = Committee.objects.get( year = year )
+            # president = UserInfo.objects.get(slug = object.president)
+            # ast_president_1 = UserInfo.objects.get(slug = object.ast_president_1)
+            # ast_president_2 = UserInfo.objects.get(slug = object.ast_president_2)
+            # ast_president_3 = UserInfo.objects.get(slug = object.ast_president_3)
+            # general_secretary = UserInfo.objects.get(slug = object.general_secretary)
+            # ast_general_secretary_1 = UserInfo.objects.get(slug = object.ast_general_secretary_1)
+            # ast_general_secretary_2 = UserInfo.objects.get(slug = object.ast_general_secretary_2)
+            # treasurer = UserInfo.objects.get(slug = object.treasurer)
+            # ast_treasurer_1 = UserInfo.objects.get(slug = object.ast_treasurer_1)
+            # ast_treasurer_2 = UserInfo.objects.get(slug = object.ast_treasurer_2)
+            # doptor_sompadok = UserInfo.objects.get(slug = object.doptor_sompadok)
+            # prochar_sompadok = UserInfo.objects.get(slug = object.prochar_sompadok)
+            # appayon_sompadok = UserInfo.objects.get(slug = object.appayon_sompadok )
+            # sikkha_krira_sangskritik_sompadok = UserInfo.objects.get(slug = object.sikkha_krira_sangskritik_sompadok)
+            # member_1 = UserInfo.objects.get(slug = object.member_1)
+            # member_2 = UserInfo.objects.get(slug = object.member_2)
+            # member_3 = UserInfo.objects.get(slug = object.member_3)
+            # member_4 = UserInfo.objects.get(slug = object.member_4)
             messages.error(request,"For this Committee, Some member's data is missing! ")
         context = {
-              'president':president,
+            'president':president,
+            'ast_president_1':ast_president_1,
+            'ast_president_2':ast_president_2,
+            'ast_president_3':ast_president_3,
+            'general_secretary':general_secretary,
+            'ast_general_secretary_1':ast_general_secretary_1,
+            'ast_general_secretary_2':ast_general_secretary_2,
+            'sangothonik_sompadok':sangothonik_sompadok,
+            'treasurer':treasurer, 
+            'ast_treasurer_1':ast_treasurer_1, 
+            'ast_treasurer_2':ast_treasurer_2,
+            'doptor_sompadok':doptor_sompadok,
+            'prochar_sompadok':prochar_sompadok,
+            'appayon_sompadok':appayon_sompadok, 
+            'sikkha_krira_sangskritik_sompadok':sikkha_krira_sangskritik_sompadok,
+            'member_1':member_1,
+            'member_2':member_2,
+            'member_3':member_3,
+            'member_4':member_4,
               'all':all,
               'obj':object,
             }
