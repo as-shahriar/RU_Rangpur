@@ -25,6 +25,10 @@ def login_view(request):
             if user :
                 if user.is_active:
                     login(request,user)
+
+                    if 'next' in request.POST:
+                        return redirect(request.POST.get('next'))
+
                     return redirect('home')
                 else:
                     messages.error(request,"This Id is Blocked!")

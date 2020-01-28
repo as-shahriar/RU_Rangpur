@@ -25,6 +25,7 @@
       </div>
       <form class="form-group" method="POST">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
         <div class="form-row align-items-center">
           <div class="col-12">
             <label class="sr-only" for="inlineFormInputGroup">Username</label>
