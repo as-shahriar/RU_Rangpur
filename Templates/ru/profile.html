@@ -381,8 +381,8 @@
     <script type="text/javascript">
         function ValidateSize(file) {
             var FileSize = file.files[0].size / 1024 / 1024; // in MB
-            if (FileSize > 0.5) {
-                alert('Image size exceeds 500KB!');
+            if (FileSize > 50) {
+                alert('Image size exceeds!');
                 clearFileInput("pic");
             }
         }

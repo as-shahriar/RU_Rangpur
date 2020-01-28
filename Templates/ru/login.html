@@ -4,29 +4,17 @@
 <div class="main-content-container container-fluid px-4">
   <!-- login -->
   <div>
-    <h1 id="head">Rangpur Metropolitan Student Welfare Association</h1>
-    <h3 id="sub_head">University of Rajshahi</h3>
+    <h1 id='head'>রংপুর সদর ছাত্রকল্যাণ সমিতি</h1>
+    <h3 id='sub_head'>রাজশাহী বিশ্ববিদ্যালয়</h3>
   </div>
 
   <div class="row mt-2">
     <div class="col-lg-4 col-md-3  "></div>
-    <div
-      class="container-login col-lg-4 col-md-6 col-sm-12 "
-      id="container_login"
-    >
+    <div class="container-login col-lg-4 col-md-6 col-sm-12 " id="container_login">
       {% if messages %} {% for msg in messages %}
-      <div
-        class="alert alert-warning alert-dismissible fade show"
-        id="hide"
-        role="alert"
-      >
+      <div class="alert alert-warning alert-dismissible fade show" id="hide" role="alert">
         {{msg}}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -46,13 +34,8 @@
                   <i class="material-icons">face</i>
                 </div>
               </div>
-              <input
-                type="text"
-                class="form-control"
-                id="inlineFormInputGroup"
-                name="username"
-                placeholder="Username"
-              />
+              <input type="text" class="form-control" id="inlineFormInputGroup" name="username"
+                placeholder="Username" />
             </div>
           </div>
           <div class="col-12">
@@ -63,13 +46,8 @@
                   <i class="material-icons">vpn_key</i>
                 </div>
               </div>
-              <input
-                type="password"
-                class="form-control"
-                id="inlineFormInputGroup"
-                name="password"
-                placeholder="Password"
-              />
+              <input type="password" class="form-control" id="inlineFormInputGroup" name="password"
+                placeholder="Password" />
             </div>
           </div>
 
@@ -79,17 +57,11 @@
             </button>
 
             <div class="d-flex justify-content-end">
-              <a href="{% url 'reset' %}" class="forget_tag mb-3 mx-2"
-                >Forget Password?</a
-              >
+              <a href="{% url 'reset' %}" class="forget_tag mb-3 mx-2">Forget Password?</a>
             </div>
             <div class="d-flex justify-content-end">
-              <span class="my-1" style="color: #657575"
-                >Don't have an account yet?</span
-              >
-              <a href="{% url 'signup' %}" class="btn btn-outline-success mx-2"
-                >Signup here</a
-              >
+              <span class="my-1" style="color: #657575">Don't have an account yet?</span>
+              <a href="{% url 'signup' %}" class="btn btn-outline-success mx-2">Signup here</a>
             </div>
           </div>
         </div>
@@ -98,14 +70,12 @@
     <div class="col-lg-4 col-md-3 "></div>
   </div>
   <div class="d-flex justify-content-center my-3">
-    <a class="btn btn-outline-success" href="{% url 'download'%}"
-      >Download Android App</a
-    >
+    <a class="btn btn-outline-success" href="{% url 'download'%}">Download Android App</a>
   </div>
 </div>
 
 <script type="text/javascript">
-  setTimeout(function() {
+  setTimeout(function () {
     document.getElementById("hide").style.display = "none";
   }, 5000);
 </script>

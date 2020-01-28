@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.db.models import Q
-from ru.models import User,UserInfo
+from ru.models import User,UserInfo,About
 from django.http import Http404
 from django.conf import settings
 from search.models import Report,Committee,ResetCode
@@ -211,6 +211,7 @@ def getObj(q,request):
             'member_4':member_4,
               'all':all,
               'obj':object,
+              'text':About.objects.all().first().about
             }
     return context
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ru.models import UserInfo
+from ru.models import UserInfo, About
 from search.models import Report, Committee, ResetCode
 
 
@@ -37,3 +37,4 @@ class ResetCodeAdmin(admin.ModelAdmin):
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Committee, CommitteeAdmin)
 admin.site.register(ResetCode, ResetCodeAdmin)
+admin.site.register(About)

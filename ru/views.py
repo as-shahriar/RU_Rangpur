@@ -7,6 +7,8 @@ from ru.forms import UserForm
 import smtplib as mail
 import datetime, _thread
 from search.views import search,EMAIL,PASSWORD
+from RU_rangpur.settings import MEDIA_DIR
+import os
 
 
 
@@ -60,14 +62,14 @@ def signup_view(request):
 def send_mail_to_admin(email_to,username):
     email = EMAIL
     password = PASSWORD
-    profile_link = 'http://127.0.0.1:8000/user/'+username
+    profile_link = 'http://rmswa.pythonanywhere.com/user/'+username
     to = 'rifat.rihan.bd@gmail.com'
     try:
         mail_obj = mail.SMTP('smtp.gmail.com',587)
         mail_obj.starttls()
         mail_obj.login(email,password)
         sub = 'New Account Created | '+username
-        content = 'Dear Admin,\n\nNew Account Created on your site.\n\nUsername: '+username+'\nProfile: '+profile_link+'\n\nBy\nSystem\nRangpur Metropolitan Student Welfare Association\nUniversity of Rajshahi'
+        content = 'Dear Admin,\n\nNew Account Created on your site.\n\nUsername: '+username+'\nProfile: '+profile_link+'\n\nBy\nSystem\nRangpur Sadar Student Welfare Association\nUniversity of Rajshahi'
         msg = 'Subject: '+sub+'\n'+content
         mail_obj.sendmail(email,to,msg)
         mail_obj.quit()
@@ -77,14 +79,14 @@ def send_mail_to_admin(email_to,username):
 def send_mail_to_user(email_to,username):
     email = EMAIL
     password = PASSWORD
-    profile_link = 'http://127.0.0.1:8000/user/'+username
+    profile_link = 'http://rmswa.pythonanywhere.com/user/'+username
     to = email_to
     try:
         mail_obj = mail.SMTP('smtp.gmail.com',587)
         mail_obj.starttls()
         mail_obj.login(email,password)
         sub = 'Your Account Created | '+username
-        content = 'Dear '+username+',\n\nYour Account Created on Site.\n\nUsername: '+username+'\nProfile: '+profile_link+'\n\nSincerely,\nRangpur Metropolitan Student Welfare Association\nUniversity of Rajshahi'
+        content = 'Dear '+username+',\n\nYour Account Created on Site.\n\nUsername: '+username+'\nProfile: '+profile_link+'\n\nSincerely,\nRangpur Sadar Student Welfare Association\nUniversity of Rajshahi'
         msg = 'Subject: '+sub+'\n'+content
         mail_obj.sendmail(email,to,msg)
         mail_obj.quit()
@@ -159,8 +161,13 @@ def profile(request):
                 else:
                     messages.error(request,"Invalid image format! Use jpg, jpeg or png.")
                     return redirect('profile')
+
                 if  "default.png" not in str(userinfo.img):
-                    userinfo.img.delete()
+                    img_path =  os.path.join(MEDIA_DIR,userinfo.img.name)
+                    delete_old_img = True
+
+
+
                 userinfo.img = request.FILES['img']
 
             if request.POST.get('passcheck')=="on":
@@ -170,6 +177,11 @@ def profile(request):
             userinfo.save()
             messages.success(request,"Profile Updated!")
             hasinfo = True
+            try:
+                if delete_old_img:
+                    os.remove(img_path)
+            except:
+                pass
 
     return render(request,'ru/profile.html',{'hasinfo': hasinfo,'userinfo':userinfo, 'form': form,'date_list':date_list})
 
@@ -184,6 +196,5 @@ def home(request):
 
     else:
         return render(request,'ru/home.html')
-    
 
-    
+
