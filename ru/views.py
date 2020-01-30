@@ -26,7 +26,7 @@ def login_view(request):
                 if user.is_active:
                     login(request,user)
 
-                    if 'next' in request.POST:
+                    if 'next' in request.POST and request.POST.get('next')!="":
                         return redirect(request.POST.get('next'))
 
                     return redirect('home')
