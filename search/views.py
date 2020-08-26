@@ -14,7 +14,7 @@ from . import auto
 
 
 EMAIL = 'ru.rangpur.sadar@gmail.com'
-PASSWORD = 'ydowsaqxzxbcauli'
+PASSWORD = '' #password for email
 
 @login_required
 def search(request):
